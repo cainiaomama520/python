@@ -1,0 +1,34 @@
+# coding:utf-8
+
+class A:
+    
+    def __init__(self, x=0):
+        self.x = x
+
+    # 类实例方法，self即为实例本身
+    def foo(self, y=0):
+        print(self.x,y)
+
+    @classmethod   # 类方法，cls即为类本身
+    def class_foo(cls, x=1, y=1):
+        return cls(x)
+
+    @staticmethod  # 静态方法
+    def static_foo(x=2):
+        return A(x)
+
+if __name__ == '__main__':
+    a = A()
+    #print(a.x)
+    #print(a.foo())
+    b = A.class_foo()
+    #print(b.x)
+    c = A.static_foo()
+    print(c.x)
+
+    '''
+    下面说说区别，实例方法隐含的参数为类实例self，而类方法隐含的参数为类本身cls。 
+    静态方法无隐含参数，主要为了类实例也可以直接调用静态方法。
+    所以逻辑上，类方法应当只被类调用，实例方法实例调用，静态方法两者都能调用。
+    主要区别在于参数传递上的区别，实例方法悄悄传递的是self引用作为参数，而类方法悄悄传递的是cls引用作为参数。
+    '''
